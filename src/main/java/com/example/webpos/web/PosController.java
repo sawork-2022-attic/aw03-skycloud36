@@ -44,4 +44,13 @@ public class PosController {
         model.addAttribute("cart", posService.getCart());
         return "redirect:/";
     }
+
+    @GetMapping("/deleteItem")
+    public String poss(@RequestParam("productId") String productId,
+                       Model model) {
+        posService.delete(productId);
+        model.addAttribute("products", posService.products());
+        model.addAttribute("cart", posService.getCart());
+        return "redirect:/";
+    }
 }

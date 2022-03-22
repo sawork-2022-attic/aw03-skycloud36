@@ -170,7 +170,8 @@
 		</div> <!-- price-wrap .// -->
 	</td>
 	<td class="text-right"> 
-	<a href="" class="btn btn-outline-danger"> <i class="fa fa-trash"></i></a>
+	<a th:href="@{deleteItem?productId={productId}(productId=${item.product.id})}"
+       class="btn btn-outline-danger"> <i class="fa fa-trash"></i></a>
 	</td>
 </tr>
 </tbody>

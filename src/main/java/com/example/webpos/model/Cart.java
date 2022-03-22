@@ -28,7 +28,18 @@ public class Cart {
         else{
             return items.add(item);
         }
+    }
 
+    //delete the item by productID
+    public boolean deleteItem(Item item){
+        Item temp = this.findItem(item);
+        if(temp != null){
+            items.remove(temp);
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     @Override
