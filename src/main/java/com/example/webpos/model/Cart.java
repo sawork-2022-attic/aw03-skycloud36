@@ -10,8 +10,25 @@ public class Cart {
 
     private List<Item> items = new ArrayList<>();
 
+    public Item findItem(Item item){
+        for(Item it: items){
+            if(it.getProduct().getId().equals(item.getProduct().getId())){
+                return it;
+            }
+        }
+        return null;
+    }
+
     public boolean addItem(Item item) {
-        return items.add(item);
+        Item temp = this.findItem(item);
+        if(temp != null){
+            temp.setQuantity(temp.getQuantity() + item.getQuantity());
+            return true;
+        }
+        else{
+            return items.add(item);
+        }
+
     }
 
     @Override
