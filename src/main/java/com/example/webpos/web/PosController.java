@@ -36,7 +36,7 @@ public class PosController {
     }
 
     @GetMapping("/addItem")
-    public String poss(@RequestParam("productId") String productId,
+    public String addItem(@RequestParam("productId") String productId,
                        @RequestParam("amount") int amount,
                        Model model) {
         posService.add(productId, amount);
@@ -46,9 +46,35 @@ public class PosController {
     }
 
     @GetMapping("/deleteItem")
-    public String poss(@RequestParam("productId") String productId,
+    public String deleteItem(@RequestParam("productId") String productId,
                        Model model) {
         posService.delete(productId);
+        model.addAttribute("products", posService.products());
+        model.addAttribute("cart", posService.getCart());
+        return "redirect:/";
+    }
+
+    @GetMapping("/modifyItem")
+    public String modifyItem(@RequestParam("productId") String productId,
+                             @RequestParam("amount") int amount,
+                             Model model) {
+        posService.modify(productId,amount);
+        model.addAttribute("products", posService.products());
+        model.addAttribute("cart", posService.getCart());
+        return "redirect:/";
+    }
+
+    @GetMapping("/emptyCart")
+    public String emptyCart(Model model) {
+        posService.empty();
+        model.addAttribute("products", posService.products());
+        model.addAttribute("cart", posService.getCart());
+        return "redirect:/";
+    }
+
+    @GetMapping("/pay")
+    public String pay(Model model) {
+        posService.empty();
         model.addAttribute("products", posService.products());
         model.addAttribute("cart", posService.getCart());
         return "redirect:/";

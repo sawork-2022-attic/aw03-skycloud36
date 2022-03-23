@@ -114,7 +114,8 @@
 		<figcaption class="info-wrap">
 			<a href="#" class="title"><span th:text="${product.name}"></span></a>
 			<div class="action-wrap">
-				<a th:href="@{/addItem?productId={productId}&amount={amount}(productId=${product.id},amount=1)}"
+<!--				<a th:href="@{/addItem?productId={productId}&amount={amount}(productId=${product.id},amount=1)}"-->
+                <a th:href="@{/addItem(productId=${product.id}, amount=1)}"
                    class="btn btn-primary btn-sm float-right"> <i class="fa fa-cart-plus"></i> Add </a>
 				<div class="price-wrap h5">
 					<span class="price-new", th:text="${product.price}">$1280</span>
@@ -154,12 +155,15 @@
 	<td class="text-center"> 
 		<div class="m-btn-group m-btn-group--pill btn-group mr-2" role="group" aria-label="...">
 																		<button type="button"
+                                                                                th:onclick="openModify([[${item.product.id}]],-1)"
                                                                                 class="m-btn btn btn-default"><i
-                                                                                class="fa fa-minus"></i></button>
+                                                                                class="fa fa-minus"></i>
+                                                                        </button>
 																		<button type="button"
                                                                                 class="m-btn btn btn-default"
                                                                                 disabled><span th:text="${item.quantity}"></span></button>
 																		<button type="button"
+                                                                                th:onclick="openModify([[${item.product.id}]],1)"
                                                                                 class="m-btn btn btn-default"><i
                                                                                 class="fa fa-plus"></i></button>
 																	</div>
@@ -169,8 +173,9 @@
 			<var class="price"><span th:text="${item.product.price}"></span></var>
 		</div> <!-- price-wrap .// -->
 	</td>
-	<td class="text-right"> 
-	<a th:href="@{deleteItem?productId={productId}(productId=${item.product.id})}"
+    <td class="text-right">
+<!--    <a th:href="@{/deleteItem?productId={productId}(productId=${item.product.id})}"-->
+	<a th:href="@{/deleteItem(productId=${item.product.id})}"
        class="btn btn-outline-danger"> <i class="fa fa-trash"></i></a>
 	</td>
 </tr>
@@ -189,19 +194,19 @@
                     </dl>
                     <dl class="dlist-align">
                         <dt>Sub Total:</dt>
-                        <dd class="text-right">$215</dd>
+                        <dd class="text-right">$0</dd>
                     </dl>
                     <dl class="dlist-align">
                         <dt>Total:</dt>
-                        <dd class="text-right h4 b"> $215</dd>
+                        <dd class="text-right h4 b" th:text="${cart.total_cost}"> $215</dd>
                     </dl>
                     <div class="row">
                         <div class="col-md-6">
-                            <a href="#" class="btn  btn-default btn-error btn-lg btn-block"><i
+                            <a href="/emptyCart" class="btn  btn-default btn-error btn-lg btn-block"><i
                                     class="fa fa-times-circle "></i> Cancel </a>
                         </div>
                         <div class="col-md-6">
-                            <a href="#" class="btn  btn-primary btn-lg btn-block"><i class="fa fa-shopping-bag"></i>
+                            <a href="/pay" class="btn  btn-primary btn-lg btn-block"><i class="fa fa-shopping-bag"></i>
                                 Charge </a>
                         </div>
                     </div>
@@ -228,6 +233,11 @@
         $("#cart").height(445);
         $("#cart").overlayScrollbars({});
     });
+</script>
+<script>
+    function openModify(productId, amount){
+        window.location.href="/modifyItem?productId="+productId+"&amount="+amount;
+    }
 </script>
 </body>
 </html>
