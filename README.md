@@ -1,21 +1,5 @@
-# WebPOS
-
-The demo shows a simple POS system in MVC architecture, which replaces the shell interface in aw02 with a pos web ui (https://github.com/bshbsh404/simple-pos-ui
-).
-
-![](screenshot.png)
-
-To run
-
-```shell
-mvn clean spring-boot:run
-```
-
-Currently, it just lists the products for sale with a cart with one item (just for demonstration). 
-
-Please read the tutorial at  https://www.baeldung.com/spring-boot-crud-thymeleaf and make the POS system robust and fully functional. You can also refer to other articles, for instance https://www.baeldung.com/tag/thymeleaf/ .
-
-
-
-And please elaborate your understanding in MVC architecture via this homework in your README.md.
-
+# 对MVC的理解
+1. MVC将数据交互，客户交互，UI设计相分离，有很强的可重构能力
+2. 在数据交互方面，这部分内容由后端代码实现与数据库的数据交流，前段只需储存需要的内容即可，比如在这次作业中，前端只动态保存一个购物清单，而对购物清单的具体操作比如添加，删除，清空等都交给posservice实现。
+3. 在客户交互方面，客户通过点击网页上的控件，向controller发出请求，controller接受请求并开始数据交互处理请求。请求的结果利用model输出到网页上。
+4. 在UI方面，则独立出static文件夹作为资源，只需在HTML文件内部调用就可以显示一些已有的图像，此外，可以通过修改static文件夹下的内容，就可以实现UI的修改。
